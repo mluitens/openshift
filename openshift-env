@@ -1,0 +1,30 @@
+$env:PATH = $env:PATH + ';C:\Tools\helm'
+Write-Host "Laden van de OpenShift CLI binaries en toevoegen in PATH"
+Start-Sleep -Seconds 2; 
+Write-Host "klaar"
+& crc oc-env | Invoke-Expression
+Write-Host "";
+Write-Host "";
+Write-Host "Started the OpenShift cluster.
+
+The server is accessible via web console at:
+  https://console-openshift-console.apps-crc.testing
+
+Log in as administrator:
+  Username: kubeadmin
+  Password: ****
+
+Log in as user:
+  Username: developer
+  Password: developer
+"
+
+Write-Host "Grep command in Powershell";
+Write-Host "oc describe node|Select-String "InternalIp"";
+Write-Host "";
+Write-Host "";
+crc console --credentials
+Write-Host "oc login -u kubeadmin -p **** https://api.crc.testing:6443";
+Write-Host "oc login -u developer -p **** https://api.crc.testing:6443";
+Write-Host "https://console-openshift-console.apps-crc.testing"
+Write-Host "type 'Console' or use the CLI"
